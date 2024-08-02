@@ -1,0 +1,22 @@
+{
+  "name": "xplore-deo",
+  "version": "1.0.0",
+  "description": "'xplore-deo' is inspired by the Youtube and it is a video-streaming platform.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "mongoose",
+    "express",
+    "backend"
+  ],
+  "author": "Praveen Lodhi",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3"
+  }
+}
