@@ -1,0 +1,34 @@
+1. Create a 'src' directory:
+
+    -add files in src :: touch app.js index.js constants.js .env .env.sample README.md     
+    -add sub-directory in src :: mkdir controllers db middlewares models routes utils
+
+    *if command not work for all together do one-by-one.
+    *index.js is our entry point.
+
+
+2. Go inside models directory (cd models):
+    -touch comment.models.js like.models.js playlist.models.js subscription.models.js  tweet.models.js video.models.js
+
+3. Go inside models directory (cd models):
+    -touch comment.models.js like.models.js playlist.models.js subscription.models.js  tweet.models.js video.models.js
+
+4. Go inside models directory (cd models):
+    -touch comment.models.js like.models.js playlist.models.js subscription.models.js  tweet.models.js video.models.js
+
+5. install packages:
+    -npm i express mongoose -g
+
+6. RUN SERVER -> for running server (index.js), we have write whole path again-and-again but if we add script, we only need to write command.
+    -"start": "node src/index.js"
+
+7. DEVELOPMENT SERVER: we make a 'dev' script, so that whenever we make chages in project it get updated on its own (nodemon install for this purpose)
+    -"dev": "nodemon src/index.js"
+    -"dev": "nodemon -r dotenv/config --experimental-json-modules src.index.js"  (if upper-one doesn't work coz sometime nodemon unable to catch enviromental variables)
+
+8. Install 'env' packages for handling environment variables:
+    -npm i dotenv
+
+9. Install 'cors' package so that we can decide who should talk to our application; act as a middleware:
+    -CORS (Cross-Origin Resource Sharing) is a security feature implemented in web browsers that allows or restricts web applications running at one origin from accessing resources from a different origin. It is implemented through HTTP headers that let a server specify who can access its assets and which HTTP methods are allowed.
+    -npm i cors
