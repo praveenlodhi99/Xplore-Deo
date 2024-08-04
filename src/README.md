@@ -53,3 +53,23 @@
         -inside src/db/index.js ------> import this in src/index.js(entry point) 
 
         *make sure write .js in the end when importing files.
+
+12. Standardize error & response and asyncHandler in src/utils:
+        -ApiError.js
+        -ApiResponse.js
+        -asyncHandler.js
+
+*LOGIC: Each of the model get a controller & each controller get its route.
+
+13. Building Health Cheak Api to reach atleast one reliable endpoint, it is a common standard practise, in case you are looking to deploy your application on aws or any such cloud provider, they have these things load balancers,etc. which are dependent on these Health Cheak.
+        -dividing everything in a dedicated folder
+        -create healthcheak.controllers.js      -->      src/controllers/healthcheak.controllers.js
+
+        -import routes in app.js
+        -register routes in app.js
+        -
+
+14. Testing with 'Postman' application:
+                -create collection "Xplore-Deo" 
+                        -> folder "healthcheak" -> GET request "healthcheak" -> Enter URL -> http://localhost:8000/api/v1/healthcheak
+

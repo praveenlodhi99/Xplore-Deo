@@ -18,3 +18,5 @@ const asyncHandler = (requestHandler) => {
 // const someAsyncRouteHandler = asyncHandler(async (req, res, next) => {
 //     // Your async route handling logic here
 // });
+
+export { asyncHandler }

@@ -33,5 +33,3 @@ class ApiError extends Error {
 
 // Export the custom ApiError class for use in other modules
 export { ApiError }
-
-//s  
