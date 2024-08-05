@@ -73,3 +73,5 @@
                 -create collection "Xplore-Deo" 
                         -> folder "healthcheak" -> GET request "healthcheak" -> Enter URL -> http://localhost:8000/api/v1/healthcheak
 
+15. Add Schema in different models (src/models)
+        -also add 'mongooseAggregatePaginate' for pipelining models whereever needed.

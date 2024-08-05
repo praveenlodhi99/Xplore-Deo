@@ -1,18 +1,27 @@
 import mongoose, { Schema } from "mongoose";
 
+/*
+Tweet Schema Definition:
+- content: The text content of the tweet
+- owner: Reference to the User model, representing the user who created the tweet
+- createdAt: Timestamp when the tweet was created
+- updatedAt: Timestamp when the tweet was last updated
+*/
+
 const tweetSchema = new Schema(
     {
         content: {
-            type: String, 
-            required: true,
+            type: String,
+            required: true, // Content of the tweet is required
         },
 
         owner: {
             type: Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User", // Reference to the User model
         },
     },
-    { timestamps: true }   //for createdAt & updatedAt
+    { timestamps: true } // Automatically manages createdAt & updatedAt fields
 )
 
-export const Tweet = mongoose.model("Tweet", tweetSchema)     //always write Playlist in capital format whenever exporting. 
+// Export the Tweet model
+export const Tweet = mongoose.model("Tweet", tweetSchema); // Always capitalize Tweet when exporting

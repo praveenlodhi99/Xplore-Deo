@@ -1,18 +1,29 @@
 import mongoose, { Schema } from "mongoose";
 
+/*
+Subscription Schema Definition:
+- channel: Reference to the user (channel) being subscribed to
+- subscriber: Reference to the user subscribing to the channel
+- createdAt: Timestamp when the subscription was created
+- updatedAt: Timestamp when the subscription was last updated
+*/
+
 const subscriptionSchema = new Schema(
     {
         channel: {
-            type: Schema.Types.ObjectId, //one to whom `subscriber is subscribing.
+            type: Schema.Types.ObjectId, // User being subscribed to
             ref: "User",
+            // required: true,
         },
 
         subscriber: {
-            type: Schema.Types.ObjectId,   //one who is subscribing.
-            ref: "User"
+            type: Schema.Types.ObjectId, // User subscribing
+            ref: "User",
+            // required: true,
         },
     },
-    { timestamps: true }   //for createdAt & updatedAt
+    { timestamps: true } // Automatically manages createdAt & updatedAt fields
 )
 
-export const Subscription = mongoose.model("Subscription", subscriptionSchema)     //always write Playlist in capital format whenever exporting. 
+// Export the Subscription model
+export const Subscription = mongoose.model("Subscription", subscriptionSchema); // Always capitalize Subscription when exporting
