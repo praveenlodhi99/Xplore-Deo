@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 /*
 User Schema Definition:
@@ -24,7 +25,7 @@ const userSchema = new Schema(
             unique: true,
             lowercase: true,
             trim: true,
-            index: true, // Adds an index for faster queries, not required for every field
+            index: true, // Index for faster lookups by username
         },
 
         email: {
@@ -39,7 +40,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             trim: true,
-            index: true, // Adds an index for faster queries, not required for every field
+            index: true, // Index for faster lookups by full name
         },
 
         avatar: {
@@ -62,15 +63,52 @@ const userSchema = new Schema(
             type: String,
             required: [true, "Password is required"],
             minlength: 8,
-            select: false, // Password field is not selected by default when querying documents
+            select: false, // Password is excluded from queries by default for security reasons
         },
 
         refreshToken: {
             type: String,
         },
     },
-    { timestamps: true } // Automatically manages createdAt & updatedAt fields
+    { timestamps: true } // Automatically manage createdAt and updatedAt timestamps
 )
 
+// Middleware pre-hook to hash password before saving user
+userSchema.pre("save", async function (next) {
+    // Only hash the password if it is new or modified
+    // If it's the first time saving the document, it will also hash the password
+    if (!this.isModified("password")) return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+})
+
+// Method to compare provided password with the hashed password in the database
+userSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password);
+}
+
+// Method to generate a short-lived access token for authentication
+userSchema.methods.generateAccessToken = function () {
+    return jwt.sign({
+        _id: this._id,
+        username: this.username,
+        fullName: this.fullName,
+        email: this.email,
+    },
+    process.env.ACCESS_TOKEN_SECRET, // Secret key for signing the access token
+    { expiresIn: process.env.ACCESS_TOKEN_EXPIRY } // Token expiry time
+    );
+}
+
+// Method to generate a long-lived refresh token for renewing access tokens
+userSchema.methods.generateRefreshToken = function () {
+    return jwt.sign({
+        _id: this._id, // Only include user ID in the refresh token
+    },
+    process.env.REFRESH_TOKEN_SECRET, // Secret key for signing the refresh token
+    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY } // Token expiry time
+    );
+}
+
 // Export the User model
-export const User = mongoose.model("User", userSchema); // Always capitalize User when exporting
+export const User = mongoose.model("User", userSchema); // Capitalized name for consistency

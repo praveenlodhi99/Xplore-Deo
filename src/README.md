@@ -75,3 +75,12 @@
 
 15. Add Schema in different models (src/models)
         -also add 'mongooseAggregatePaginate' for pipelining models whereever needed.
+
+16. We are using middleware 'prehook' in the user model (src/models/user.model.js) to hash the password which is used by password:
+        -install 'bcrypt' package -> npm i bcrypt
+                +whenever password modified only then hash again except for the first time the user signning up
+                +during login to cheak if password in database is same as password provided by user during Login, we compare both password
+
+        -to generate access/refresh token, install jwt package -> npm i jsonwebtoken
+                +generate access token (short lived)
+                +generate refresh token (long lived and stored in database)
