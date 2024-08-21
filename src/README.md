@@ -1,3 +1,6 @@
+
+To preview a README.md file in Visual Studio Code, you can use the following shortcut key: Ctrl + Shift + V
+
 1. Create a 'src' directory:
 
         -add files in src :: touch app.js index.js constants.js .env .env.sample README.md     
@@ -84,3 +87,20 @@
         -to generate access/refresh token, install jwt package -> npm i jsonwebtoken
                 +generate access token (short lived)
                 +generate refresh token (long lived and stored in database)
+
+*NOTE: To cheak how code is written/routes are designed go to npmjs.com and read how it is written
+
+17. Install a package to store 'cookies'
+        - A cookie parser is a middleware in web development that is used to parse cookies attached to client requests. Cookies are small pieces of data sent from a website and stored in the user's browser. They are typically used to track and remember information about the user's session or preferences.
+        - npm install cookie-parser
+        - import cookie-parser in app.js
+
+18. Install a package to upload files as express do not provide it 'multer'
+        - Multer is a middleware for handling multipart/form-data, which is primarily used for uploading files. It's commonly used in applications that require file uploads, like image or document upload features.
+        - npm i multer
+
+        - go to middleware and create a file - multer.middlewares.js
+
+19. Install a package to store files
+        - npm i cloudinary
+        - go to utils and create a file - cloudinary.js

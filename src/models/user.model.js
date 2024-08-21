@@ -77,6 +77,7 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next) {
     // Only hash the password if it is new or modified
     // If it's the first time saving the document, it will also hash the password
+    // this. is the one who has the sccess of ther model is denoted by 'this' here   
     if (!this.isModified("password")) return next();
     this.password = await bcrypt.hash(this.password, 10);
     next();
